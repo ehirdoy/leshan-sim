@@ -1,21 +1,17 @@
 version: '2'
 
 services:
-  bss:
-    image: 'jeanblanchard/busybox-java'
-    volumes:
-      - '.:/demo'
-    command: java -jar /demo/leshan-bsserver-demo.jar
   ms:
     image: 'jeanblanchard/busybox-java'
     volumes:
       - '.:/demo'
+    ports:
+    - 8080:8080
     command: java -jar /demo/leshan-server-demo.jar
   dev:
+    depends_on:
+      - 'ms'
     image: 'jeanblanchard/busybox-java'
     volumes:
       - '.:/demo'
-    command: java -jar /demo/leshan-client-demo.jar
-    depends_on:
-      - 'bss'
-      - 'ms'
+    command: java -jar /demo/leshan-client-demo.jar -u ms
