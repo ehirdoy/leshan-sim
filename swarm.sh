@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 #
 # This script assumes that you've already populated swarm00 with docker(+ compose) installed.
 #
