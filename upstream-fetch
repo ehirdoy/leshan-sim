@@ -1,0 +1,4 @@
+for x in server client
+do
+	time curl https://hudson.eclipse.org/leshan/job/leshan/lastSuccessfulBuild/artifact/leshan-$x-demo.jar -o leshan-$x-demo.jar
+done

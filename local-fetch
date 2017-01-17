@@ -1,0 +1,8 @@
+find leshan/*-demo -name "*-SNAPSHOT-jar-with-dependencies.jar" | while read old
+do
+	new=$(echo $old | sed 's/-0.1.11-M15-SNAPSHOT-jar-with-dependencies//g')
+	new=$(basename $new)
+	cp -v $old $new
+done
+ls -alt *.jar
+

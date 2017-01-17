@@ -66,8 +66,9 @@ function swarm_init {
     done
 }
 
-#az vm restart -g $rgrp -n swarm00
-time az_vm_delete	&& echo "VMs deleted" || { echo "Failed to delete VMs" && exit 123; }
-time az_vm_populate	&& echo "VMs populated " || { echo "Failed to populate VMs" && exit 123; }
+az vm restart -g $rgrp -n swarm00
+time az_vm_delete	&& echo "$maxvm VMs deleted" || { echo "Failed to delete VMs" && exit 123; }
+sleep 60 # workaround for az vm list time lag
+time az_vm_populate	&& echo "$maxvm VMs populated" || { echo "Failed to populate VMs" && exit 123; }
 local_ssh_key_cleanup
-time swarm_init		&& echo "Swarm initialized" || { echo "Failed to init Swarms" && exit 123; }
+time swarm_init		&& echo "$maxvm Swarm initialized" || { echo "Failed to init Swarms" && exit 123; }
