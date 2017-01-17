@@ -9,7 +9,7 @@ import argparse
 def sendHttp(arg,start,totalEnd,step):
     print(datetime.datetime.now())
     end = start + step
-    
+
     while end <= totalEnd:
         a = datetime.datetime.now()
         for i in range(start,end):
@@ -19,7 +19,7 @@ def sendHttp(arg,start,totalEnd,step):
                 endPoint = 'aaaa' + str(i)
                 secretKey = '04030201'
                 data = json.dumps({"endpoint":endPoint,"psk":{"identity":endPoint,"key":secretKey}})
-                resp = requests.put(addurl, data) 
+                resp = requests.put(addurl, data)
             elif arg == "remove":
                 resp = requests.delete(deleteUrl)
             else:
@@ -42,11 +42,11 @@ def main(argv):
     end = 100
     parser = argparse.ArgumentParser()
     parser.add_argument('mode', choices=['add','rem'], help="add|remove client endPoints")
-    parser.add_argument('-start', type=int, action='store', nargs='?', 
+    parser.add_argument('-start', type=int, action='store', nargs='?',
                         default=start, help="start index (default: %(default)s)")
-    parser.add_argument('-end', type=int, action='store', nargs='?', 
+    parser.add_argument('-end', type=int, action='store', nargs='?',
                         default=end, help="end index (default: %(default)s)")
-    parser.add_argument('-step', type=int, action='store', nargs='?', 
+    parser.add_argument('-step', type=int, action='store', nargs='?',
                         default=step, help="step of index (default: %(default)s)")
     args = parser.parse_args()
     print(args)
@@ -65,4 +65,3 @@ def main(argv):
 
 if __name__ == "__main__":
    main(sys.argv[1:])
-
